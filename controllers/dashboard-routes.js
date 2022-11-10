@@ -7,11 +7,11 @@ router.get('/', async (req, res) => {
         res.json(err);
       });
         const posts = postData.map((post) => post.get({ plain: true }));
-        res.render('all-posts', { posts });
-      });
+        res.render('all-posts-admin', { posts });
+});
   
   // route to get one post
-  router.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try { 
       const postData = await Post.create({
        
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
-  });
+});
 
 
 module.exports = router;
