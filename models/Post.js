@@ -14,11 +14,6 @@ Post.init(
         type: DataTypes.STRING,
         allowNull: false,
     },
-    created_date: {
-      type: DataTypes.DATE,
-
-    },
-    
   },
   {
     sequelize,

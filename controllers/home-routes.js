@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     console.log(posts)
     res.render('all-posts', {
       posts,
-      // logged_in: req.session.logged_in
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -52,26 +52,6 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get('/dashboard', withAuth, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('all-posts-admin', {
-      ...user,
-      logged_in: true
-    });
-    
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route

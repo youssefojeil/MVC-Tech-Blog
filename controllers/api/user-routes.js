@@ -33,7 +33,8 @@ router.post('/login', async (req, res) => {
   try {
     // query db and check if username already exists
     const userData = await User.findOne({ where: { username: req.body.username } });
-
+    console.log("THIS IS USERNAME")
+    console.log(userData.username);
     if (!userData) {
       res
         .status(400)
@@ -65,7 +66,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
-      res.status(204).end();
+      res.status(200).json({message: 'You are now Logged out!'});
     });
   } else {
     res.status(404).end();
